@@ -5,13 +5,12 @@ CFLAGS=-I$(IDIR) $(WARNS)
 
 all: client server
 
-client: client.c 
-	$(CC) -o client client.c
+client: src/client.c 
+	$(CC) -o build/client src/client.c
 
-server: server.c
-	$(CC) -o server server.c
+server: src/server.c
+	$(CC) -o build/server src/server.c
 
 .PHONY: clean
 clean:
-	-rm -f server.exe
-	-rm -f client.exe
+	@ -rm -f build/*
