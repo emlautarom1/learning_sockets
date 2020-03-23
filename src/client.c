@@ -38,14 +38,14 @@ int main(int argc, char const *argv[])
     // Configura serv_addr
     memset((char *)&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    bcopy(
+    memcpy(
         (char *)server->h_addr,
         (char *)&serv_addr.sin_addr.s_addr,
         server->h_length);
     serv_addr.sin_port = htons(port_number);
 
     // Se establece una conexión con el servidor
-    int connect_result = connect(fd_sock, &serv_addr, sizeof(serv_addr));
+    int connect_result = connect(fd_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
 
     if (connect_result < 0)
         panic("Could not connect");
